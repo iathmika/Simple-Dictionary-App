@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/enterWord"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:hint="Enter Word here . . ."
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@id/imgButton_speech"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imgButton_speech"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="24dp"
+        android:scaleType="fitXY"
+        android:onClick="btnSpeech"
+        android:backgroundTint="@color/background_color"
+        app:layout_constraintBottom_toTopOf="@id/showDef"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enterWord"
+        app:srcCompat="@drawable/mic" />
+
+    <TextView
+        android:id="@+id/showDef"
+        android:layout_width="341dp"
+        android:layout_height="157dp"
+        android:layout_margin = "24dp"
+        android:hint="Meaning . . . "
+        android:scrollbars="vertical"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@id/findBtn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgButton_speech" />
+
+    <Button
+        android:id="@+id/findBtn"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="sendRequestOnClick"
+        android:text="Find meaning"
+        android:textColor="#ffffff"
+        android:textSize="20dp"
+
+        app:layout_constraintBottom_toTopOf="@id/pronounce"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/showDef" />
+
+    <ImageButton
+        android:id="@+id/pronounce"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="24dp"
+        android:scaleType="fitXY"
+
+        android:backgroundTint="@color/background_color"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/findBtn"
+        app:srcCompat="@drawable/speaker"
+        tools:ignore="MissingConstraints"
+
+    />
+<!--
+    <Button
+        android:id="@+id/btn_speechText"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Say it!"
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pronounce"
+        tools:ignore="MissingConstraints" /> -->
+
+<!--    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:onClick="btnSpeech"
+        android:text="Tap to Open Mic"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_speechText"
+        tools:ignore="MissingConstraints" />
+    -->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
