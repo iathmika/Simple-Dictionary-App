@@ -1,37 +1,54 @@
 package com.example.dictionaryapp;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.net.ssl.HttpsURLConnection;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
-public class DictionaryRequest extends AsyncTask<String, Integer, String> {
 
-    Context context;
-    TextView showDef;
-    DictionaryRequest(Context context, TextView tV)
+
+//in android calling network requests on the main thread forbidden by default
+//create class to do async job
+public class ThesaurusRequest extends AsyncTask<String, Integer, String> {
+    Context context2;
+    TextView synonym;
+
+    ThesaurusRequest(Context context2, TextView tV)
     {
-        this.context = context;
-        showDef = tV;
+        this.context2 = context2;
+        synonym = tV;
     }
     @Override
     protected String doInBackground(String... params) {
 
         //TODO: replace with your own app id and app key
-        final String app_id = "4f82352e";
-        final String app_key = "c34fcd1522e23c441ba826865499fb8c";
+        final String app_id = "c2e7b1fe";
+        final String app_key = "c36dcd311d964bfd7041f090522ec733";
         try {
             URL url = new URL(params[0]);
             HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Accept","application/json");
             urlConnection.setRequestProperty("app_id",app_id);
             urlConnection.setRequestProperty("app_key",app_key);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+            }
 
             // read the output from the server
             BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -51,11 +68,12 @@ public class DictionaryRequest extends AsyncTask<String, Integer, String> {
         }
     }
 
+
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        String def;
         try {
+            String Syn = "";
             JSONObject js = new JSONObject(result);
             JSONArray results = js.getJSONArray("results");
             JSONObject lEntries = results.getJSONObject(0);
@@ -64,14 +82,35 @@ public class DictionaryRequest extends AsyncTask<String, Integer, String> {
             JSONArray e = entries.getJSONArray("entries");
             JSONObject jsonObject = e.getJSONObject(0);
             JSONArray sensesArray = jsonObject.getJSONArray("senses");
+
             JSONObject de = sensesArray.getJSONObject(0);
-            JSONArray d = de.getJSONArray("definitions");
-            def = d.getString(0);
-            showDef.setText(def);
-        } catch (JSONException e) {
+
+            JSONArray d = de.getJSONArray("subsenses");
+
+            JSONObject sub = sensesArray.getJSONObject(0);
+
+            JSONArray synArr = de.getJSONArray("synonyms");
+            String[] synonyms = new String[100];
+            List<String> allNames = new ArrayList<String>();
+            for (int i = 0, size = 5; i < size; i++) {
+                JSONObject objectInArray = synArr.getJSONObject(i);
+                String s = objectInArray.getString("text");
+                allNames.add(s);
+
+
+                synonyms[i] = s;
+            }
+            synonym.setText(allNames.toString());
+            // synonym.setText(synonyms[0].toString()+", "+synonyms[1].toString());
+
+            Log.d("synonyms are ","hi" +synonyms.toString());
+        }catch (JSONException e) {
             e.printStackTrace();
         }
         Log.v("Result of Dictionary", "onPostExecute" +result);
-        }
-}
 
+        System.out.println(result);
+
+
+    }
+}

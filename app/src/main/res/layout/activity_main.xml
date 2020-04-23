@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="@drawable/gradient"
     android:padding="16dp"
     tools:context=".MainActivity">
 
@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:hint="Enter Word here . . ."
+        android:textColorHint="@android:color/white"
         android:textSize="20dp"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toTopOf="@id/imgButton_speech"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -27,40 +29,73 @@
         android:scaleType="fitXY"
         android:onClick="btnSpeech"
         android:backgroundTint="@color/background_color"
-        app:layout_constraintBottom_toTopOf="@id/showDef"
+        app:layout_constraintBottom_toTopOf="@id/synonym"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/enterWord"
         app:srcCompat="@drawable/mic" />
 
+
+    <TextView
+        android:id="@+id/synonym"
+        android:layout_width="289dp"
+        android:layout_height="104dp"
+        android:hint="Synonym . . . "
+        android:textColorHint="@android:color/white"
+        android:scrollbars="vertical"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toTopOf="@id/showDef"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgButton_speech" />
+
     <TextView
         android:id="@+id/showDef"
-        android:layout_width="341dp"
-        android:layout_height="157dp"
-        android:layout_margin = "24dp"
+        android:layout_width="289dp"
+        android:layout_height="104dp"
         android:hint="Meaning . . . "
+        android:textColorHint="@android:color/white"
         android:scrollbars="vertical"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        app:layout_constraintBottom_toTopOf="@id/findSyn"
+        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/synonym"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/findSyn"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/custom_button"
+        android:onClick="sendRequestOnClick2"
+        android:text="Synonym"
+        android:textColor="#ffffff"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@id/findBtn"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgButton_speech" />
+        app:layout_constraintTop_toBottomOf="@id/showDef" />
 
     <Button
         android:id="@+id/findBtn"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_margin="20dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:layout_margin="10dp"
+        android:background="@drawable/custom_button"
         android:onClick="sendRequestOnClick"
-        android:text="Find meaning"
+        android:text="Meaning"
         android:textColor="#ffffff"
         android:textSize="20dp"
-
-        app:layout_constraintBottom_toTopOf="@id/pronounce"
+        app:layout_constraintBottom_toTopOf="@id/findSyn"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/showDef" />
+        app:layout_constraintTop_toBottomOf="@id/pronounce"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/pronounce"
@@ -68,46 +103,11 @@
         android:layout_height="60dp"
         android:layout_marginBottom="24dp"
         android:scaleType="fitXY"
-
         android:backgroundTint="@color/background_color"
-
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/findBtn"
         app:srcCompat="@drawable/speaker"
         tools:ignore="MissingConstraints"
-
-    />
-<!--
-    <Button
-        android:id="@+id/btn_speechText"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="Say it!"
-        android:textColor="#ffffff"
-        android:textSize="15dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pronounce"
-        tools:ignore="MissingConstraints" /> -->
-
-<!--    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:onClick="btnSpeech"
-        android:text="Tap to Open Mic"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_speechText"
-        tools:ignore="MissingConstraints" />
-    -->
-
-
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
